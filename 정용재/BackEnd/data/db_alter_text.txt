@@ -1,0 +1,18 @@
+ALTER TABLE `tag` ADD CONSTRAINT `tag_id` PRIMARY KEY (`tag_id`);
+ALTER TABLE `playlist` ADD CONSTRAINT `playlist_id` PRIMARY KEY (`playlist_id`);
+ALTER TABLE `genre_big` ADD CONSTRAINT `genre_big_id` PRIMARY KEY (`genre_big_id`);
+ALTER TABLE `genre_detail` ADD CONSTRAINT `genre_detail_id` PRIMARY KEY (`genre_detail_id`);
+ALTER TABLE `song` ADD CONSTRAINT `song_id` PRIMARY KEY (`song_id`);
+ALTER TABLE `artist` ADD CONSTRAINT `artist_id` PRIMARY KEY (`artist_id`);
+ALTER TABLE `playlist_tag` ADD FOREIGN KEY (`tag_id`) REFERENCES `tag` (`tag_id`) ON DELETE CASCADE;
+ALTER TABLE `playlist_tag` ADD FOREIGN KEY (`playlist_id`) REFERENCES `playlist` (`playlist_id`) ON DELETE CASCADE;
+ALTER TABLE `playlist_song` ADD FOREIGN KEY (`song_id`) REFERENCES `song` (`song_id`) ON DELETE CASCADE;
+ALTER TABLE `playlist_song` ADD FOREIGN KEY (`playlist_id`) REFERENCES `playlist` (`playlist_id`) ON DELETE CASCADE;
+ALTER TABLE `song_genre_big` ADD FOREIGN KEY (`song_id`) REFERENCES `song` (`song_id`) ON DELETE CASCADE;
+ALTER TABLE `playlist_song` ADD FOREIGN KEY (`genre_b_id`) REFERENCES `genre_big` (`genre_code`) ON DELETE CASCADE;
+ALTER TABLE `song_genre_detail` ADD FOREIGN KEY (`song_id`) REFERENCES `song` (`song_id`) ON DELETE CASCADE;
+ALTER TABLE `song_genre_detail` ADD FOREIGN KEY (`genre_d_id`) REFERENCES `genre_detail` (`genre_detail_code`) ON DELETE CASCADE;
+ALTER TABLE `song_artist` ADD FOREIGN KEY (`artist_id`) REFERENCES `artist` (`artist_id`) ON DELETE CASCADE;
+ALTER TABLE `song_artist` ADD FOREIGN KEY (`song_id`) REFERENCES `song` (`song_id`) ON DELETE CASCADE;
+ALTER TABLE `playlist_artist` ADD FOREIGN KEY (`playlist_id`) REFERENCES `playlist` (`playlist_id`) ON DELETE CASCADE;
+ALTER TABLE `playlist_artist` ADD FOREIGN KEY (`artist_id`) REFERENCES `artists` (`artist_id`) ON DELETE CASCADE;
